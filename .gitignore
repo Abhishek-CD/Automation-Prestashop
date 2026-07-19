@@ -1,0 +1,16 @@
+# Maven
+target/
+
+# TestNG reports
+test-output/
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+
+# Temporary Office files
+~$*.xlsx

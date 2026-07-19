@@ -30,7 +30,7 @@ public class CreateAccPage {
 	By createAccBtn = By.xpath("//button[contains(@class,'btn btn-primary form-control-submit')and @data-link-action=\"save-customer\"]");
 	By continueButtonGuest = By.xpath("//button[@name='continue']");
 	By forLogout = By.xpath("//button[@id='userMenuButton']");
-	By logOut = By.xpath("//a[contains(@class,'dropdown-item') and contains(normalize-space(.),'Sign out')]");
+	By logOut = By.xpath("//a[contains(@class,'dropdown-item') and contains(normalize-space(),'Sign out')]");
 	
 	public void clickSign() {
 		driver.findElement(clickSignin).click();

@@ -42,7 +42,8 @@ public class LandingPage {
 	By payment = By.xpath("//button[@name='confirmDeliveryOption']");
 	By payByBank = By.id("payment-option-1");
 	By privacyCheckbox = By.id("conditions_to_approve[terms-and-conditions]");
-	By placeOrderButton = By.xpath("//button[@type='submit' and contains(normalize-space(.), 'Place Order')]");
+	By placeOrderButton = By.xpath("//button[@type='submit' and contains(normalize-space(), 'Place Order')]");
+	By orderRefID = By.xpath("//li[contains(text(),'Order reference')]");
 	By homeLogo = By.xpath("//img[@class='logo img-fluid']");
 	
 	public void clickAllProducts() throws InterruptedException {
@@ -140,12 +141,24 @@ public class LandingPage {
 	public void clickPrivacyCheckBox() {
 		driver.findElement(privacyCheckbox).click();
 	}
-	public void placeOrder() throws InterruptedException {
+	public void placeOrder() {
 		Actions action = new Actions(driver);
 		action.scrollToElement(driver.findElement(placeOrderButton)).perform();
 		driver.findElement(placeOrderButton).click();
 		
-		clickAllProducts();
+
+	}
+	
+	public String getOrderID() throws InterruptedException {
+		Actions action = new Actions(driver);
+		action.scrollToElement(driver.findElement(orderRefID)).perform();
+		String referanceIDFullText = driver.findElement(orderRefID).getText();
+		String referanceID = referanceIDFullText.replace("Order reference: ","");
+//		System.out.println(referanceID);
+		return referanceID;
+
+		
+		
 	}
 	public void buyProduct() throws InterruptedException {
 		clickAllProducts();
@@ -173,7 +186,23 @@ public class LandingPage {
 		clickPayByBank();
 		clickPrivacyCheckBox();
 		placeOrder();
-		
+		clickAllProducts();
+	}
+	
+	
+	public String addAddress2(String address,String zip, String city, String comment) throws InterruptedException {
+		addAddressCol(address);
+		addZipcode(zip);
+		addCity(city);
+		addressContinueBtn();
+		setDeliveryMsg(comment);
+		clickContinuePayment();
+		clickPayByBank();
+		clickPrivacyCheckBox();
+		placeOrder();
+		String oId = getOrderID();
+		clickAllProducts();
+		return oId;
 	}
 	
 	

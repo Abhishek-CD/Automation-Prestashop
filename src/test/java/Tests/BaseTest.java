@@ -28,14 +28,8 @@ public class BaseTest {
         prefs.put("credentials_enable_service", false);
         prefs.put("profile.password_manager_enabled", false);
         prefs.put("profile.password_manager_leak_detection", false);
+        prefs.put("autofill.profile_enabled", false);
 
-        // Disable browser permission popups
-        prefs.put("profile.default_content_setting_values.notifications", 2);
-        prefs.put("profile.default_content_setting_values.geolocation", 2);
-        prefs.put("profile.default_content_setting_values.media_stream_camera", 2);
-        prefs.put("profile.default_content_setting_values.media_stream_mic", 2);
-
-        // Apply preferences
         options.setExperimentalOption("prefs", prefs);
 
         // Start Chrome with the options
@@ -44,11 +38,11 @@ public class BaseTest {
         
         
         
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));//for every elements
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         
         driver.manage().window().maximize();
         driver.get("https://demo.prestashop.com/#/en/front");
-//        driver.get("https://windy-bell.demo.prestashop.com/");
+
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // for the specific element
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id("framelive")));

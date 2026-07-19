@@ -53,9 +53,9 @@ public class AdminTest extends BaseTest {
 		login.searchOrder();
 		
 		lpage.buyAfterLogin();
-		lpage.addAddress(address, zip, city, comment);
-		
-		adm.respondOrder();
+		String orderId = lpage.addAddress2(address, zip, city, comment);
+		System.out.println(orderId);
+		adm.respondOrder(orderId);
 		
 		
 		
